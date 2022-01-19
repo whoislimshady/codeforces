@@ -1,4 +1,6 @@
 #include <bits/stdc++.h>
+#include <algorithm>
+#include <numeric>
 #define endl '\n'
 #define ll long long int
 #define loop(i, a, b) for (ll i = a; i <= b; ++i)
@@ -120,33 +122,57 @@ void ara_print(T &v)
 const int INF = 1e9 + 99;
 typedef pair<int, int> Pair;
 typedef vector<int> vec;
-
-void solve(){
-    int n;
-    cin >> n;
-    vector<int>a(n), used(n + 1, false);
-    for(auto &i : a) cin >> i;
-    sort(a.begin(), a.end(), [] (int a, int b) {
-        return a > b;
-    });
-    bool ok = true;
-    for(auto &i : a){
-        int x = i;
-        while(x > n or used[x])  x /= 2;
-        if(x > 0) used[x] = true;
-        else ok = false;
-    }
-    cout << (ok ? "YES" : "NO") << '\n';
-
+int gcdofvector(vector<ll> &arr, ll idx)
+{
+    if (idx == arr.size() - 1)
+        return arr[idx];
+    ll a = arr[idx];
+    ll b = gcdofvector(arr, idx + 1);
+    return __gcd(a, b);
 }
-
-int main(){
-    ios_base :: sync_with_stdio(false);
-    cin.tie(nullptr);
-    int t;
-    cin >> t;
-    while(t--){
-        solve();
+bool check(vector<ll> &arr, ll a)
+{
+    for (int i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] % a == 0)
+        {
+            return false;
+        }
     }
+    return true;
+}
+int main()
+{
+    ll l = 0;
+    cin >> l;
+
+    for (int i = 0; i < l; i++)
+    {
+
+        ll n;
+        cin >> n;
+        vector<ll> vec_even;
+        vector<ll> vec_odd;
+        for (int i = 1; i < n + 1; i++)
+        {
+            ll c;
+            cin >> c;
+            if (i % 2 == 0)
+                vec_even.push_back(c);
+            else
+                vec_odd.push_back(c);
+        }
+        ll p = gcdofvector(vec_even, 0);
+        ll q = gcdofvector(vec_odd, 0);
+        if (check(vec_even, q))
+            cout << q << "\n";
+        else if (check(vec_odd, p))
+            cout << p << "\n";
+        else
+            cout << "0"
+                 << "\n";
+
+    }
+
     return 0;
 }
