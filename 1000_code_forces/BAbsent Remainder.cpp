@@ -122,27 +122,42 @@ void ara_print(T &v)
 const int INF = 1e9 + 99;
 typedef pair<int, int> Pair;
 typedef vector<int> vec;
+int gcdofvector(vector<ll> &arr, ll idx)
+{
+    if (idx == arr.size() - 1)
+        return arr[idx];
+    ll a = arr[idx];
+    ll b = gcdofvector(arr, idx + 1);
+    return __gcd(a, b);
+}
+void solve()
+{
+    ll m;
+    cin >> m;
+    vector<ll> v;
+    for (int i = 0; i < m; i++)
+    {
+        int n;
+        cin >> n;
+        v.push_back(n);
+
+    }
+    sort(v.begin(),v.end());
+    for (int i = 0; i < ((m/2)-1); i++)
+    {
+        v[i]%
+    }
+    
+}
+
 int main()
 {
-    int n, i = 0, j = 0, k = 0, l = 0, m = 2;
-    cin >> n;
-    for (int i = 1; i < n + 1; i++)
+    ll l;
+    cin >> l;
+    while (l--)
     {
-        for (int j = 0; j < n - k; j++)
-            printf(" \n");
 
-        for (int k = 0; k < 2 * n; k++)
-        {
-            if (k <= n)
-                printf("%d", k);
-            else
-            {
-                printf("%d", k - m);
-                m++;
-            }
-        }
-        for (int l = 0; l < n - k ; l++)
-            printf(" \n");
+        solve();
     }
 
     return 0;
